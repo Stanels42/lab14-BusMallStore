@@ -11,8 +11,10 @@ function populateForm() {
 
   //TODO: Add an <option> tag inside the form's select for each product
   var selectElement = document.getElementById('items');
-  for (var i in Product.allProducts) {
-
+  for (var i = 0; i <Product.allProducts.length; i++) {
+    var optionTag = document.createElement('option');
+    optionTag.textContent = Product.allProducts[i].name;
+    selectElement.appendChild(optionTag);
   }
 
 }
@@ -21,31 +23,46 @@ function populateForm() {
 // object, save the whole thing back to local storage and update the screen
 // so that it shows the # of items in the cart and a quick preview of the cart itself.
 function handleSubmit(event) {
+  //  Prevent the page from reloading
+  event.preventDefault();
 
-  // TODO: Prevent the page from reloading
-
+  
   // Do all the things ...
   addSelectedItemToCart();
   cart.saveToLocalStorage();
   updateCounter();
   updateCartPreview();
-
+  document.getElementById('items').value = null;
+  document.getElementById('quantity').value = null;
 }
 
-// TODO: Add the selected item and quantity to the cart
+//  Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
-  // TODO: suss out the item picked from the select list
-  // TODO: get the quantity
-  // TODO: using those, add one item to the Cart
+  // suss out the item picked from the select list
+  
+  var item = document.getElementById('items').value;
+
+  var quantity = parseInt(document.getElementById('quantity').value);
+  //  get the quantity
+  // using those, add one item to the Cart
+  cart.addItem(item, quantity);
+  // console.log(cart);
 }
 
-// TODO: Update the cart count in the header nav with the number of items in the Cart
-function updateCounter() {}
+//  Update the cart count in the header nav with the number of items in the Cart
+function updateCounter() {
+  document.getElementById('itemCount').textContent = cart.items.length;
+}
 
-// TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
+//  As you add items into the cart, show them (item & quantity) in the cart preview div
 function updateCartPreview() {
   // TODO: Get the item and quantity from the form
+  var cartCont = document.getElementById('cartContents');
+  cartCont.innerHTML ='';
   // TODO: Add a new element to the cartContents div with that information
+  for(var i = 0; i <cart.items.length; i++){
+    cartCont.textContent +=  `(${cart.items[i].product}, ${cart.items[i].quantity})`;
+  }
 }
 
 // Set up the "submit" event listener on the form.
