@@ -1,1 +1,65 @@
 /* TODO: Make it awesome */
+/* Universal */
+* {
+  font-size: 30px;
+  text-align: center;
+}
+body{
+  background-image: url(https://is.alicdn.com/img/pb/708/885/258/1279776442694_hz-myalibaba-web-temp1_1519.JPG);
+  background-size: 100%;
+  background-position-y: 25%;
+  background-repeat: no-repeat;
+  width:60%;
+  margin: 0 auto;
+}
+/* Header */
+header{
+  
+  background-color: rgba(0, 225, 255, 0.6);
+  font-size: 60px;
+  color:red;
+}
+/* Main */
+main {
+  background-color: rgba(255, 0, 0, 0.65);
+  color:whitesmoke;
+  padding: 1em;
+}
+a {
+  text-decoration: none;
+
+}
+/* Table */
+table {
+  width: 80%;
+  margin: 0 auto;
+  border: black dotted 2px;
+}
+img {
+  width: 100px;
+}
+tr {
+  margin: auto;
+  background-color: rgba(0, 225, 255, 0.6);
+}
+th {
+  
+}
+td {
+  border: black dotted 2px;
+  /* padding: 2em; */
+  /* vertical-align: center; */
+  line-height: 100px;
+  height: 100px;
+  color: red;
+}
+td:hover {
+  background-color: red;
+  color:rgba(0, 225, 255, 0.6);
+}
+/* Footer */
+footer {
+  padding: 1em;
+  background-color: red;
+  color: lightblue;
+}

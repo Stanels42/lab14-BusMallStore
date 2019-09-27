@@ -6,6 +6,7 @@ var table = document.getElementById('cart');
 table.addEventListener('click', removeItemFromCart);
 var cart;
 var tBody = document.getElementsByTagName('tbody')[0];
+var tFoot = document.getElementsByTagName('tfoot')[0];
 
 function loadCart() {
   var cartItems = JSON.parse(localStorage.getItem('cart')) || [];
@@ -22,22 +23,36 @@ function renderCart() {
 //  Remove all of the rows (tr) in the cart table (tbody)
 function clearCart() {
   tBody.innerHTML = '';
-  // console.log(document.getElementsByTagName('tbody'));
 }
 
-// TODO: Fill in the <tr>'s under the <tbody> for each item in the cart
+
 function showCart() {
 
-  // TODO: Find the table body
   for(var i = 0; i < cart.items.length; i++){
     var newRow = addElement('tr', tBody);
     addElement('td', newRow, 'x', i);
     addElement('td', newRow, cart.items[i].quantity);
-    addElement('td', newRow, cart.items[i].product);
+    addImage(addElement('td', newRow), cart.items[i].product);
   }
-
 }
 
+function addImage (parent, cartItem) {
+
+  var imgElement = document.createElement('img');
+
+  for (var i = 0; i < Product.allProducts.length; i++ ) {
+
+    if (Product.allProducts[i].name ===  cartItem) {
+
+      imgElement.setAttribute('src', Product.allProducts[i].filePath);
+
+    }
+
+  }
+
+  parent.appendChild(imgElement);
+
+}
 function addElement(element, parent, value, id = -1){
 
   var newElement = document.createElement(element);
@@ -54,11 +69,13 @@ function addElement(element, parent, value, id = -1){
 
 function removeItemFromCart(event) {
   event.preventDefault();
-  // TODO: When a delete link is clicked, use cart.removeItem to remove the correct item
-  cart.items.splice(event.target.id, 1);
-  // TODO: Save the cart back to local storage
+
+  if (event.target.textContent === 'x') {
+    cart.items.splice(event.target.id, 1);
+  }
+
   cart.saveToLocalStorage();
-  // TODO: Re-draw the cart table
+
   renderCart();
 
 }
